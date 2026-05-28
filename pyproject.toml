@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "structural-computing-bench"
+version = "0.1.0a1"
+description = "Calibrate the cost models used by structural-computing's router via wall-clock measurements on your machine."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Edward Chalk (sapientronic.ai)" },
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+keywords = [
+    "benchmarking", "calibration", "structural-computing",
+    "matchgate", "holant", "performance",
+]
+dependencies = [
+    "numpy>=1.24",
+    "structural-computing>=0.2.0a1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/pcoz/structural-computing-bench"
+"Source code" = "https://github.com/pcoz/structural-computing-bench"
+"Issue tracker" = "https://github.com/pcoz/structural-computing-bench/issues"
+"Related framework" = "https://github.com/pcoz/structural-computing"
+
+[tool.setuptools.packages.find]
+include = ["bench*"]
+exclude = ["tests*", "scripts*", "calibration_data*"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
