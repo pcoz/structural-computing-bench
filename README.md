@@ -1,5 +1,7 @@
 # structural-computing-bench
 
+[![PyPI](https://img.shields.io/pypi/v/structural-computing-bench.svg)](https://pypi.org/project/structural-computing-bench/)
+
 Calibrate the cost models used by
 [`structural-computing`](https://github.com/pcoz/structural-computing)'s
 router by measuring actual wall-clock performance of its leaf
@@ -31,7 +33,7 @@ to update the router's coefficients at runtime.
 ## Quick start
 
 ```
-pip install -e .
+pip install structural-computing-bench
 python scripts/run_calibration.py --out calibration_data/my_machine.py
 ```
 
