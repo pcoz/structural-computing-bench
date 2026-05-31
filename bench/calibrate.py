@@ -20,6 +20,13 @@ from .problems import (
     make_cycle_graph,
     make_bipartite_graph,
     make_symmetric_signature,
+    # v1.1.0: generators for the tropical + CP-SAT leaves.
+    make_weighted_bipartite_graph,
+    make_scheduling_instance,
+    make_flow_instance,
+    make_rostering_instance,
+    make_dedup_instance,
+    make_cpsat_cardinality_model,
 )
 
 
@@ -28,6 +35,17 @@ DEFAULT_SIZES: Dict[str, List[int]] = {
     "T2_matching_count":     [4, 6, 8, 10, 12, 14],
     "T4_matching_count":     [2, 3, 4, 5],
     "T2_matchgate_rank":     [2, 4, 6, 8, 10],
+    # v1.1.0: sizes for the tropical + CP-SAT leaves. The Hungarian /
+    # Edmonds path is O(n^3) so we can go larger than the brute-force
+    # leaves. The CP-SAT rewrite leaf is sensitive to constraint count;
+    # sizing by variable count.
+    "T2_min_weight_matching": [4, 6, 8, 10, 12],
+    "T2_min_cost_schedule":   [2, 3, 4, 5, 6],
+    "T2_min_cost_flow":       [2, 3, 4, 5, 6],
+    "T2_min_cost_roster":     [2, 3, 4, 5, 6],
+    "T2_min_cost_dedup":      [2, 3, 4, 5, 6],
+    "T2_tropical_coords":     [2, 3, 4, 5, 6],
+    "T2_rewrite_cpsat_model": [4, 6, 8, 10, 12],
 }
 
 
@@ -70,6 +88,14 @@ def calibrate_default_evaluators(*,
         _count_solutions_leaf,
         _matching_count_leaf,
         _matchgate_rank_leaf,
+        # v1.1.0: tropical + CP-SAT leaves
+        _min_weight_matching_leaf,
+        _min_cost_schedule_leaf,
+        _min_cost_flow_leaf,
+        _min_cost_roster_leaf,
+        _min_cost_dedup_leaf,
+        _tropical_instance_coordinates_leaf,
+        _rewrite_cpsat_model_leaf,
     )
     effective_sizes = dict(DEFAULT_SIZES)
     if sizes is not None:
@@ -98,5 +124,28 @@ def calibrate_default_evaluators(*,
          make_bipartite_graph,     "T4_matching_count",  "matching_count")
     _add(("T2", "matchgate_rank"),  _matchgate_rank_leaf,
          make_symmetric_signature, "T2_matchgate_rank",  "matchgate_rank")
+    # v1.1.0: tropical + CP-SAT leaves.
+    _add(("T2", "min_weight_matching"),       _min_weight_matching_leaf,
+         make_weighted_bipartite_graph,       "T2_min_weight_matching",
+         "min_weight_matching")
+    _add(("T2", "min_cost_schedule"),         _min_cost_schedule_leaf,
+         make_scheduling_instance,            "T2_min_cost_schedule",
+         "min_cost_schedule")
+    _add(("T2", "min_cost_flow"),             _min_cost_flow_leaf,
+         make_flow_instance,                   "T2_min_cost_flow",
+         "min_cost_flow")
+    _add(("T2", "min_cost_roster"),           _min_cost_roster_leaf,
+         make_rostering_instance,              "T2_min_cost_roster",
+         "min_cost_roster")
+    _add(("T2", "min_cost_dedup"),            _min_cost_dedup_leaf,
+         make_dedup_instance,                  "T2_min_cost_dedup",
+         "min_cost_dedup")
+    _add(("T2", "tropical_instance_coordinates"),
+         _tropical_instance_coordinates_leaf,
+         make_scheduling_instance,             "T2_tropical_coords",
+         "tropical_instance_coordinates")
+    _add(("T2", "rewrite_cpsat_model"),       _rewrite_cpsat_model_leaf,
+         make_cpsat_cardinality_model,         "T2_rewrite_cpsat_model",
+         "rewrite_cpsat_model")
 
     return out
