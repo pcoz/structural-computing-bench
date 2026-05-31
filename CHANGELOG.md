@@ -2,10 +2,11 @@
 
 All notable changes to `structural-computing-bench`.
 
-## [Unreleased] — v0.7 arc (PyPI publication unblock)
+## 2026-05-31 — v0.7 arc (PyPI publication unblock; no version bump)
 
-**No version bump.** This arc lands `structural-computing-bench
-0.1.0a1` on PyPI for the first time.
+**Shipped 2026-05-31.** No version bump. This arc landed
+`structural-computing-bench 0.1.0a1` on PyPI for the first time.
+Live at https://pypi.org/project/structural-computing-bench/0.1.0a1/.
 
 ### Added
 
@@ -28,11 +29,12 @@ All notable changes to `structural-computing-bench`.
 - Wheel METADATA correctly carries `Requires-Dist:
   structural-computing>=0.6.0a1`.
 
-### Required ordering
+### Upload ordering (verified)
 
-- `structural-computing-bench 0.1.0a1` MUST be uploaded AFTER
-  `structural-computing 0.6.0a1` lands on PyPI, otherwise a clean
-  `pip install structural-computing-bench` will fail.
+- Uploaded AFTER `structural-computing 0.6.0a1` landed on PyPI.
+- End-to-end clean-venv smoke check: `pip install
+  structural-computing-bench` pulls in structural-computing
+  0.6.0a1 + holant-tools 0.6.1 transparently.
 
 ---
 
