@@ -7,6 +7,14 @@ All notable changes to `structural-computing-bench`.
 **No version bump.** This arc lands `structural-computing-bench
 0.1.0a1` on PyPI for the first time.
 
+### Added
+
+- `.github/workflows/publish.yml` — Trusted Publisher workflow,
+  same shape as the structural-computing + holant-tools equivalents.
+  Triggers on GitHub Release publication OR via workflow_dispatch
+  (target=pypi / testpypi). Requires a PyPI Trusted Publisher entry
+  for `structural-computing-bench` to be configured (user-action).
+
 ### Changed
 
 - `pyproject.toml`: dep floor bumped `structural-computing>=0.2.0a1`
